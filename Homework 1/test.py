@@ -35,10 +35,7 @@ def linear_regression_model(df: pd.DataFrame, estimations: pd.DataFrame):
         prediction = lr.predict(transpose.iloc[:, 0:m].values.tolist())
         mse = mean_squared_error(df['y'], prediction)
         schwartz.append(schwartz_criterion(m / data_size, data_size) * mse)
-
-    min_x = np.argmin(schwartz)
-    print("Best m:", min_x - 1)
-    print("MSE:", schwartz[min_x - 1])
+    return schwartz
 
 data = generate_data()
 print(data)
@@ -47,7 +44,7 @@ print(data_size)
 trigonometric_estimations = trigonometric_model(data.x, data_size)
 algebraic_estimations = algebraic_model(data.x, data_size)
 
-print("Trigonometric")
-d = linear_regression_model(data, trigonometric_estimations)
 
+schwartz_trigonometric = linear_regression_model(data, trigonometric_estimations)
+schwartz_algebraic = linear_regression_model(data, trigonometric_estimations)
 
