@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/HW1.iml" filepath="$PROJECT_DIR$/.idea/HW1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../NTNU-Predictive_Learning/.idea/NTNU-Predictive_Learning.iml" filepath="$PROJECT_DIR$/../../NTNU-Predictive_Learning/.idea/NTNU-Predictive_Learning.iml" />
     </modules>
   </component>
 </project>
