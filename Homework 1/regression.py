@@ -24,42 +24,39 @@ def trigonometric(x, m):
         df.loc[len(df)] =[ np.cos(2 * np.pi * xi * i) for i in range(1,  m+1)]
     return df
 
+def schwartz_criterion(p, n):
+    return 1 + p * ((1 - p) ** -1) * np.log(n)
 
-# %%
-def linear_regression_model(df: pd.DataFrame):
-    x = df.x
-    y = df.y
-    data_size = x.size
-
-    m = 5
-    #for m in range(1, data_size - 1):
-    coefficients = algebraic(x, m)
-    lr = LinearRegression()
-    lr.fit(coefficients, y)
-    prediction = lr.predict(coefficients)
-    mse = mean_squared_error(y, prediction)
-
-    sorted_pred = sorted(prediction)
-    print(sorted_pred)
-
-    plt.clf()
-    plt.scatter(x, y)
-
-    plt.scatter(x, prediction, color="b", label="Predictions")
-    print(x)
-
+def plot(x, y, prediction, m):
     sorted_pairs = sorted(zip(x, prediction))
     sorted_x, sorted_y = zip(*sorted_pairs)
 
-    # Linie durch die Vorhersagen ziehen
+    plt.clf()
+    plt.scatter(x, y)
+    plt.scatter(x, prediction, color="b", label="Predictions")
     plt.plot(sorted_x, sorted_y, color="r", label="Regression Line")
-
+    plt.title("Regression mit m: " + str(m))
     plt.show()
 
+# %%
+def linear_regression_model(df: pd.DataFrame, function):
+    x = df.x
+    y = df.y
+    data_size = x.size
+    schwartz = []
+    for m in range(1, data_size - 1):
+        coefficients = function(x, m)
+        lr = LinearRegression()
+        lr.fit(coefficients, y)
+        prediction = lr.predict(coefficients)
+        mse = mean_squared_error(y, prediction)
+        schwartz.append(schwartz_criterion(m / data_size, data_size) * mse)
+        plot(x, y, prediction, m)
 
-
-
+    min_m = np.argmin(schwartz)
+    print("Best m: " + str(min_m + 1))
+    print("Estimation of: " + str(schwartz[min_m]))
 
 if __name__ == '__main__':
-    data = generate_data(100)
-    linear_regression_model(data)
+    data = generate_data(10)
+    linear_regression_model(data, algebraic)
