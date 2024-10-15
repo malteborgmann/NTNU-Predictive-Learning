@@ -64,9 +64,6 @@ def linear_regression_model(df: pd.DataFrame, function):
             lr.fit(coefficients_train, train_y)
             prediction = lr.predict(coefficients_test)
 
-            # print("--------------------------------")
-            # print("test - y: ", test_y)
-            # print("Prediction: ", prediction)
 
             mse = mean_squared_error(test_y, prediction)
             print("Mse: ", mse)
@@ -88,4 +85,3 @@ if __name__ == '__main__':
     linear_regression_model(data, algebraic)
     linear_regression_model(data, trigonometric)
 
-# Durch hohe m's haben wir extremes overfitting. es gibt daher immer extreme ausreißer. Das hat zur Folge, dass kleine m das ganze besser darstellen.
