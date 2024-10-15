@@ -11,17 +11,17 @@ def generate_data(n=10):
     return pd.DataFrame({'x': x, 'y': y})
 
 def algebraic(x, m):
-    columns = ["m"+str(i) for i in range(1, m+1)]
+    columns = ["m"+str(i) for i in range(0, m+1)]
     df = pd.DataFrame(columns= columns)
     for xi in x:
-        df.loc[len(df)] = [xi ** i for i in range(1, m + 1)]
+        df.loc[len(df)] = [xi ** i for i in range(0, m + 1)]
     return df
 
 def trigonometric(x, m):
-    columns = ["m" + str(i) for i in range(1, m + 1)]
+    columns = ["m" + str(i) for i in range(0, m + 1)]
     df = pd.DataFrame(columns=columns)
     for xi in x:
-        df.loc[len(df)] =[ np.cos(2 * np.pi * xi * i) for i in range(1,  m+1)]
+        df.loc[len(df)] =[ np.cos(2 * np.pi * xi * i) for i in range(0,  m)]
     return df
 
 def schwartz_criterion(p, n):
