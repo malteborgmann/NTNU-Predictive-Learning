@@ -21,7 +21,7 @@ def trigonometric(x, m):
     columns = ["m" + str(i) for i in range(0, m + 1)]
     df = pd.DataFrame(columns=columns)
     for xi in x:
-        df.loc[len(df)] =[ np.cos(2 * np.pi * xi * i) for i in range(0,  m)]
+        df.loc[len(df)] =[ np.cos(2 * np.pi * xi * i) for i in range(0,  m + 1)]
     return df
 
 def schwartz_criterion(p, n):
@@ -70,8 +70,8 @@ def linear_regression_model(df: pd.DataFrame, function):
 
 if __name__ == '__main__':
     data = generate_data(20)
-    linear_regression_model(data, algebraic)
-    #linear_regression_model(data, trigonometric)
+#    linear_regression_model(data, algebraic)
+    linear_regression_model(data, trigonometric)
 
 # Je höher die Sample size ist, desto eher wird sich dem Trend angenähert. Folglich sinkt komplexität
 # Nein ist nicht möglich, da wir nur die besten Dimensionen des jeweiligen Modells zurückgegeben werden. Es findet jedoch keine Evaluierung darüber statt,
